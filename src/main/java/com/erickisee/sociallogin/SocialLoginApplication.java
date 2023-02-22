@@ -18,14 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SocialLoginApplication extends WebSecurityConfigurerAdapter {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SocialLoginApplication.class, args);
-	}
-
 	@GetMapping("/user")
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-        return Collections.singletonMap("name", principal.getAttribute("name"));
-    }
+	public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+		return Collections.singletonMap("name", principal.getAttribute("name"));
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -40,6 +36,10 @@ public class SocialLoginApplication extends WebSecurityConfigurerAdapter {
 			)
 			.oauth2Login();
 		// @formatter:on
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(SocialLoginApplication.class, args);
 	}
 
 }
